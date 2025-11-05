@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Search, ArrowRight } from 'lucide-react';
 
 interface SubmenuSection {
@@ -15,12 +16,8 @@ interface NavItem {
   };
 }
 
-interface NavigationProps {
-  onNavigate: (page: string) => void;
-  currentPage: string;
-}
-
-export default function Navigation({ onNavigate, currentPage }: NavigationProps) {
+export default function Navigation() {
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [exitingDropdown, setExitingDropdown] = useState<string | null>(null);
@@ -50,48 +47,48 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
   const navItems: NavItem[] = [
     {
       label: 'Solutions',
-      href: 'services',
+      href: '/our-services',
       submenu: {
         tabs: [
-          { label: 'Our Services', href: 'services' },
-          { label: 'Why Choose Us', href: 'about' },
-          { label: 'Partner With Us', href: 'partner' }
+          { label: 'Our Services', href: '/our-services' },
+          { label: 'Why Choose Us', href: '/about' },
+          { label: 'Partner With Us', href: '/partner' }
         ],
         sections: [
           {
             title: 'Consulting Services',
             items: [
-              { label: 'Salesforce CRM Solutions', href: 'services' },
-              { label: 'Strategy Consulting', href: 'services' },
-              { label: 'Enterprise Architecture', href: 'services' },
-              { label: 'Project Management', href: 'services' }
+              { label: 'Salesforce CRM Solutions', href: '/our-services' },
+              { label: 'Strategy Consulting', href: '/our-services' },
+              { label: 'Enterprise Architecture', href: '/our-services' },
+              { label: 'Project Management', href: '/our-services' }
             ]
           },
           {
             title: 'Managed Services',
             items: [
-              { label: 'IT Infrastructure Management', href: 'services' },
-              { label: 'Cloud Services', href: 'services' },
-              { label: 'Application Support', href: 'services' },
-              { label: 'Security Operations', href: 'services' }
+              { label: 'IT Infrastructure Management', href: '/our-services' },
+              { label: 'Cloud Services', href: '/our-services' },
+              { label: 'Application Support', href: '/our-services' },
+              { label: 'Security Operations', href: '/our-services' }
             ]
           },
           {
             title: 'Intelligence',
             items: [
-              { label: 'AI & ML', href: 'services' },
-              { label: 'DataTech & Analytics', href: 'services' },
-              { label: 'MarTech', href: 'services' },
-              { label: 'Identity Management', href: 'services' }
+              { label: 'AI & ML', href: '/our-services' },
+              { label: 'DataTech & Analytics', href: '/our-services' },
+              { label: 'MarTech', href: '/our-services' },
+              { label: 'Identity Management', href: '/our-services' }
             ]
           },
           {
             title: 'Risk & Security',
             items: [
-              { label: 'Cybersecurity', href: 'services' },
-              { label: 'GRC & Compliance', href: 'services' },
-              { label: 'Risk Assessment', href: 'services' },
-              { label: 'Penetration Testing / Threat Modeling', href: 'services' }
+              { label: 'Cybersecurity', href: '/our-services' },
+              { label: 'GRC & Compliance', href: '/our-services' },
+              { label: 'Risk Assessment', href: '/our-services' },
+              { label: 'Penetration Testing / Threat Modeling', href: '/our-services' }
             ]
           }
         ]
@@ -99,7 +96,7 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
     },
     {
       label: 'Industries',
-      href: 'industries',
+      href: '/industries',
       submenu: {
         tabs: [],
         sections: [
@@ -108,22 +105,22 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
             items: [
               {
                 label: 'Business, Consulting & Technology Services',
-                href: 'services#industry-solutions',
+                href: '/our-services#industry-solutions',
                 description: 'Modern Compliance Solutions for Consulting and Technology Firms That Can\'t Miss a Deadline'
               },
               {
                 label: 'Financial Services',
-                href: 'services#industry-solutions',
+                href: '/our-services#industry-solutions',
                 description: 'Proactive Compliance Software Built for Banks, Insurers, Credit Unions, and Investment Firms'
               },
               {
                 label: 'Hospitality & Retail',
-                href: 'services#industry-solutions',
+                href: '/our-services#industry-solutions',
                 description: 'Compliance Software Built to Keep Up With Every Shift, Store, and Staff Member'
               },
               {
                 label: 'Manufacturing & Construction',
-                href: 'services#industry-solutions',
+                href: '/our-services#industry-solutions',
                 description: 'Compliance Software to Keep Your Worksites Safe and Your Factories Running Smoothly'
               }
             ]
@@ -133,22 +130,22 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
             items: [
               {
                 label: 'Education',
-                href: 'services#industry-solutions',
+                href: '/our-services#industry-solutions',
                 description: 'Dynamic Compliance Solutions Designed to Safeguard Your Institution — and the Learners and Leaders Who Depend on It'
               },
               {
                 label: 'Government',
-                href: 'services#industry-solutions',
+                href: '/our-services#industry-solutions',
                 description: 'Defensible Compliance Software Built to Help Federal, State, and Local Teams Respond Stay Audit-Ready'
               },
               {
                 label: 'Insurance',
-                href: 'services#industry-solutions',
+                href: '/our-services#industry-solutions',
                 description: 'Compliance Solutions to Keep Every Policy Defensible and Audit-Ready — Including Your Own'
               },
               {
                 label: 'Media & Entertainment',
-                href: 'services#industry-solutions',
+                href: '/our-services#industry-solutions',
                 description: 'Technology Solutions Built for Content, Confidentiality, and Everything Behind the Scenes'
               }
             ]
@@ -158,17 +155,17 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
             items: [
               {
                 label: 'Energy & Utilities',
-                href: 'services#industry-solutions',
+                href: '/our-services#industry-solutions',
                 description: 'Compliance Solutions to Help You Stay Current and Compliant Across Pipelines, Platforms, and Plants'
               },
               {
                 label: 'Healthcare',
-                href: 'services#industry-solutions',
+                href: '/our-services#industry-solutions',
                 description: 'Automated Compliance Solutions to Protect People, Data, and Patient Care Delivery'
               },
               {
                 label: 'Law Firm Practice & Management',
-                href: 'services#industry-solutions',
+                href: '/our-services#industry-solutions',
                 description: 'Automation & Compliance Built to Empower Law Firms — and the Teams Running Them'
               }
             ]
@@ -178,23 +175,23 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
     },
     {
       label: 'About',
-      href: 'about',
+      href: '/about',
       submenu: {
         tabs: [],
         sections: [
           {
             title: '',
             items: [
-              { label: 'Who We Are', href: 'about' },
-              { label: 'Leadership', href: 'about' },
-              { label: 'News & Resources', href: 'about' },
-              { label: 'Job Openings', href: 'jobs' }
+              { label: 'Who We Are', href: '/about' },
+              { label: 'Leadership', href: '/about' },
+              { label: 'News & Resources', href: '/about' },
+              { label: 'Job Openings', href: '/jobs' }
             ]
           }
         ]
       }
     },
-    { label: 'Careers', href: 'jobs' }
+    { label: 'Careers', href: '/jobs' }
   ];
 
   return (
@@ -209,8 +206,8 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
       <header className={`sticky top-0 z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'} bg-[#0d0d0d] border-b border-gray-800`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <button
-              onClick={() => onNavigate('home')}
+            <Link
+              to="/"
               className="transition-opacity hover:opacity-80"
             >
               <img
@@ -218,7 +215,7 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
                 alt="AzeniaTechnology"
                 className="h-10 w-auto"
               />
-            </button>
+            </Link>
 
             <nav className="hidden lg:flex items-center space-x-8">
               {navItems.map((item) => (
@@ -247,17 +244,29 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
                     }
                   }}
                 >
-                  <button
-                    onClick={() => !item.submenu && onNavigate(item.href)}
-                    className={`text-sm font-medium transition-colors flex items-center space-x-1 ${
-                      currentPage === item.href
-                        ? 'text-blue-400'
-                        : 'text-white hover:text-gray-300'
-                    }`}
-                  >
-                    <span>{item.label}</span>
-                    {item.submenu && <ChevronDown className="w-4 h-4" />}
-                  </button>
+                  {item.submenu ? (
+                    <button
+                      className={`text-sm font-medium transition-colors flex items-center space-x-1 ${
+                        location.pathname === item.href
+                          ? 'text-blue-400'
+                          : 'text-white hover:text-gray-300'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className={`text-sm font-medium transition-colors flex items-center space-x-1 ${
+                        location.pathname === item.href
+                          ? 'text-blue-400'
+                          : 'text-white hover:text-gray-300'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                    </Link>
+                  )}
 
                   {item.submenu && (activeDropdown === item.label || exitingDropdown === item.label) && (
                     <div
@@ -269,15 +278,13 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
                           <ul className="space-y-1">
                             {item.submenu.sections[0].items.map((subItem, itemIdx) => (
                               <li key={itemIdx}>
-                                <button
-                                  onClick={() => {
-                                    onNavigate(subItem.href);
-                                    setActiveDropdown(null);
-                                  }}
-                                  className="w-full text-left px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded transition-colors"
+                                <Link
+                                  to={subItem.href}
+                                  onClick={() => setActiveDropdown(null)}
+                                  className="block w-full text-left px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded transition-colors"
                                 >
                                   {subItem.label}
-                                </button>
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -287,29 +294,25 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
                           {/* Blue Header Bar with Tabs - Floating */}
                           <div className="bg-blue-600 shadow-lg px-6 py-4 rounded-sm">
                             {item.label === 'Industries' ? (
-                              <button
-                                onClick={() => {
-                                  onNavigate('services#industry-solutions');
-                                  setActiveDropdown(null);
-                                }}
-                                className="text-left w-full group"
+                              <Link
+                                to="/our-services#industry-solutions"
+                                onClick={() => setActiveDropdown(null)}
+                                className="text-left block w-full group"
                               >
                                 <h3 className="text-white font-bold text-lg mb-1 group-hover:text-blue-100 transition-colors">Industry Solutions</h3>
                                 <p className="text-blue-100 text-sm">Purpose-built solutions trusted across industries — empowering you to stay ahead in a rapidly evolving world.</p>
-                              </button>
+                              </Link>
                             ) : (
                               <div className="flex items-center space-x-8">
                                 {item.submenu.tabs.map((tab, idx) => (
-                                  <button
+                                  <Link
                                     key={idx}
-                                    onClick={() => {
-                                      onNavigate(tab.href);
-                                      setActiveDropdown(null);
-                                    }}
+                                    to={tab.href}
+                                    onClick={() => setActiveDropdown(null)}
                                     className="text-white hover:text-blue-100 font-medium text-sm transition-colors"
                                   >
                                     {tab.label}
-                                  </button>
+                                  </Link>
                                 ))}
                               </div>
                             )}
@@ -328,11 +331,9 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
                                   <ul className={item.label === 'Industries' ? 'space-y-6' : 'space-y-3'}>
                                     {section.items.map((subItem, itemIdx) => (
                                       <li key={itemIdx}>
-                                        <button
-                                          onClick={() => {
-                                            onNavigate(subItem.href);
-                                            setActiveDropdown(null);
-                                          }}
+                                        <Link
+                                          to={subItem.href}
+                                          onClick={() => setActiveDropdown(null)}
                                           className="text-left block group"
                                         >
                                           <div className={`font-semibold transition-colors ${item.label === 'Industries' ? 'text-gray-900 text-base mb-2 group-hover:text-blue-600' : 'text-blue-600 group-hover:text-blue-700 text-sm'}`}>
@@ -343,7 +344,7 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
                                               {subItem.description}
                                             </div>
                                           )}
-                                        </button>
+                                        </Link>
                                       </li>
                                     ))}
                                   </ul>
@@ -353,27 +354,23 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
 
                             {/* Footer CTA */}
                             <div className="mt-8 pt-6 border-t border-gray-200 flex items-center justify-between">
-                              <button
-                                onClick={() => {
-                                  onNavigate(item.href);
-                                  setActiveDropdown(null);
-                                }}
+                              <Link
+                                to={item.href}
+                                onClick={() => setActiveDropdown(null)}
                                 className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center space-x-2 group"
                               >
                                 <span>Explore All {item.label}</span>
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                              </button>
+                              </Link>
                               {item.label === 'Solutions' && (
-                                <button
-                                  onClick={() => {
-                                    onNavigate('partner');
-                                    setActiveDropdown(null);
-                                  }}
+                                <Link
+                                  to="/partner"
+                                  onClick={() => setActiveDropdown(null)}
                                   className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center space-x-2 group"
                                 >
                                   <span>Partner With Us</span>
                                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </button>
+                                </Link>
                               )}
                             </div>
                           </div>
@@ -389,13 +386,13 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
               <button className="p-2 text-gray-300 hover:text-white transition-colors">
                 <Search className="w-5 h-5" />
               </button>
-              <button
-                onClick={() => onNavigate('contact')}
+              <Link
+                to="/contact"
                 className="px-5 py-2 text-sm font-medium transition-colors rounded"
                 style={{ backgroundColor: '#deeefe', color: '#014171' }}
               >
                 Contact Us
-              </button>
+              </Link>
             </div>
 
             <button
@@ -413,21 +410,29 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
           <div className="px-4 py-6 space-y-1">
             {navItems.map((item) => (
               <div key={item.label}>
-                <button
-                  onClick={() => {
-                    if (!item.submenu) {
-                      onNavigate(item.href);
-                      setMobileMenuOpen(false);
-                    }
-                  }}
-                  className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
-                    currentPage === item.href
-                      ? 'text-blue-400 bg-gray-800'
-                      : 'text-white hover:bg-gray-800'
-                  }`}
-                >
-                  {item.label}
-                </button>
+                {item.submenu ? (
+                  <button
+                    className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                      location.pathname === item.href
+                        ? 'text-blue-400 bg-gray-800'
+                        : 'text-white hover:bg-gray-800'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <Link
+                    to={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                      location.pathname === item.href
+                        ? 'text-blue-400 bg-gray-800'
+                        : 'text-white hover:bg-gray-800'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                )}
                 {item.submenu && (
                   <div className="ml-4 mt-1 space-y-1">
                     {item.submenu.sections.map((section, sectionIdx) => (
@@ -436,16 +441,14 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
                           {section.title}
                         </p>
                         {section.items.map((subItem, itemIdx) => (
-                          <button
+                          <Link
                             key={itemIdx}
-                            onClick={() => {
-                              onNavigate(subItem.href);
-                              setMobileMenuOpen(false);
-                            }}
-                            className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800"
+                            to={subItem.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800"
                           >
                             {subItem.label}
-                          </button>
+                          </Link>
                         ))}
                       </div>
                     ))}

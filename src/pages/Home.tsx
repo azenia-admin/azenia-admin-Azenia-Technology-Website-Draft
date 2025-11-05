@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   Award,
@@ -5,11 +6,7 @@ import {
   UserCheck
 } from 'lucide-react';
 
-interface HomeProps {
-  onNavigate: (page: string) => void;
-}
-
-export default function Home({ onNavigate }: HomeProps) {
+export default function Home() {
   const stats = [
     { value: '25+', label: 'Years of Experience' },
     { value: '500+', label: 'Client Engagements' },
@@ -44,9 +41,9 @@ export default function Home({ onNavigate }: HomeProps) {
               {/* Action Boxes */}
               <div className="grid sm:grid-cols-2 gap-4 mt-12">
                 {/* Find Business Solutions Box */}
-                <button
-                  onClick={() => onNavigate('services')}
-                  className="group relative bg-gradient-to-br from-blue-900 to-blue-800 text-white p-8 text-left hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                <Link
+                  to="/our-services"
+                  className="group relative bg-gradient-to-br from-blue-900 to-blue-800 text-white p-8 text-left hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden block"
                 >
                   <div className="absolute top-4 right-4 opacity-20 group-hover:opacity-30 transition-opacity">
                     <div className="w-20 h-20 border-4 border-blue-400 transform rotate-45"></div>
@@ -58,12 +55,12 @@ export default function Home({ onNavigate }: HomeProps) {
                       Project consulting. Hire and engage talent.
                     </p>
                   </div>
-                </button>
+                </Link>
 
                 {/* Find Career Opportunities Box */}
-                <button
-                  onClick={() => onNavigate('careers')}
-                  className="group relative bg-gradient-to-br from-blue-600 to-blue-500 text-white p-8 text-left hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                <Link
+                  to="/careers"
+                  className="group relative bg-gradient-to-br from-blue-600 to-blue-500 text-white p-8 text-left hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden block"
                 >
                   <div className="absolute top-4 right-4 opacity-20 group-hover:opacity-30 transition-opacity">
                     <div className="w-16 h-16 bg-blue-300"></div>
@@ -76,7 +73,7 @@ export default function Home({ onNavigate }: HomeProps) {
                       Partners in your career. Search our available jobs.
                     </p>
                   </div>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -136,24 +133,24 @@ export default function Home({ onNavigate }: HomeProps) {
               </div>
 
               <div className="flex flex-wrap gap-4 mt-8">
-                <button
-                  onClick={() => onNavigate('about')}
+                <Link
+                  to="/about"
                   className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium transition-colors rounded"
                 >
                   Capabilities
-                </button>
-                <button
-                  onClick={() => onNavigate('about')}
+                </Link>
+                <Link
+                  to="/about"
                   className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium transition-colors rounded"
                 >
                   Highlights
-                </button>
-                <button
-                  onClick={() => onNavigate('partner')}
+                </Link>
+                <Link
+                  to="/partner"
                   className="px-6 py-3 bg-orange-400 hover:bg-orange-500 text-white font-medium transition-colors rounded"
                 >
                   Partner with Us!
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -176,12 +173,12 @@ export default function Home({ onNavigate }: HomeProps) {
             <h2 className="text-3xl lg:text-4xl font-bold text-orange-400 uppercase tracking-wide">
               CAPABILITIES
             </h2>
-            <button
-              onClick={() => onNavigate('services')}
+            <Link
+              to="/our-services"
               className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium transition-colors rounded"
             >
               Learn More About What We Have to Offer Here at Azenia!
-            </button>
+            </Link>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -286,32 +283,32 @@ export default function Home({ onNavigate }: HomeProps) {
               'National Security',
               'Technology'
             ].map((industry, index) => (
-              <button
+              <Link
                 key={index}
-                onClick={() => onNavigate('industries')}
-                className="group bg-blue-600 hover:bg-blue-700 text-white p-6 text-left transition-all hover:shadow-lg"
+                to="/industries"
+                className="group bg-blue-600 hover:bg-blue-700 text-white p-6 text-left transition-all hover:shadow-lg block"
               >
                 <h3 className="font-semibold text-lg mb-2">{industry}</h3>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </Link>
             ))}
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <button
-              onClick={() => onNavigate('services')}
-              className="group bg-gradient-to-br from-blue-900 to-blue-800 text-white p-8 text-left hover:shadow-2xl transition-all"
+            <Link
+              to="/our-services"
+              className="group bg-gradient-to-br from-blue-900 to-blue-800 text-white p-8 text-left hover:shadow-2xl transition-all block"
             >
               <h3 className="text-2xl font-bold mb-3">Azenia Services</h3>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-            </button>
-            <button
-              onClick={() => onNavigate('partner')}
-              className="group bg-gradient-to-br from-blue-900 to-blue-800 text-white p-8 text-left hover:shadow-2xl transition-all"
+            </Link>
+            <Link
+              to="/partner"
+              className="group bg-gradient-to-br from-blue-900 to-blue-800 text-white p-8 text-left hover:shadow-2xl transition-all block"
             >
               <h3 className="text-2xl font-bold mb-3">Partner With Us</h3>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-            </button>
+            </Link>
           </div>
         </div>
       </section>

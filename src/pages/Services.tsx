@@ -1,10 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 
-interface ServicesProps {
-  onNavigate?: (page: string) => void;
-}
-
-export default function Services({ onNavigate }: ServicesProps = {}) {
+export default function Services() {
   const serviceCategories = [
     {
       title: "Consulting Services",
