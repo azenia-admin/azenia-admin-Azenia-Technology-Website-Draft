@@ -114,7 +114,7 @@ export default function Home() {
                       <img
                         src={logo.logo_url}
                         alt={logo.name}
-                        className="max-w-full max-h-full object-contain opacity-70 hover:opacity-100 transition-opacity"
+                        className="max-w-full max-h-full object-contain"
                       />
                     </div>
                   ))}
@@ -126,7 +126,7 @@ export default function Home() {
                       <img
                         src={logo.logo_url}
                         alt={logo.name}
-                        className="max-w-full max-h-full object-contain opacity-70 hover:opacity-100 transition-opacity"
+                        className="max-w-full max-h-full object-contain"
                       />
                     </div>
                   ))}
