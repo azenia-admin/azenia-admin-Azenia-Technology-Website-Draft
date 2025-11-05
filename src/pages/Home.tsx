@@ -1,18 +1,38 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import {
   ArrowRight,
   Award,
   TrendingUp,
   UserCheck
 } from 'lucide-react';
+import { supabase, ClientLogo } from '../lib/supabase';
 
 export default function Home() {
+  const [clientLogos, setClientLogos] = useState<ClientLogo[]>([]);
+
   const stats = [
     { value: '25+', label: 'Years of Experience' },
     { value: '500+', label: 'Client Engagements' },
     { value: '98%', label: 'Client Satisfaction' },
     { value: '50+', label: 'Industry Awards' }
   ];
+
+  useEffect(() => {
+    const fetchLogos = async () => {
+      const { data, error } = await supabase
+        .from('client_logos')
+        .select('*')
+        .eq('is_active', true)
+        .order('display_order');
+
+      if (!error && data) {
+        setClientLogos(data);
+      }
+    };
+
+    fetchLogos();
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0d0d0d]">
@@ -84,26 +104,40 @@ export default function Home() {
       <section className="py-16 bg-gray-900 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 className="text-center text-white text-2xl font-semibold mb-8">Trusted by Leading Organizations</h3>
-          <div className="relative">
-            <div className="flex animate-scroll">
-              {/* First set of logos */}
-              <div className="flex items-center space-x-16 min-w-full">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div key={i} className="flex-shrink-0 w-48 h-24 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-white/20">
-                    <span className="text-white font-semibold">Client Logo {i}</span>
-                  </div>
-                ))}
-              </div>
-              {/* Duplicate set for seamless loop */}
-              <div className="flex items-center space-x-16 min-w-full">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div key={`dup-${i}`} className="flex-shrink-0 w-48 h-24 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-white/20">
-                    <span className="text-white font-semibold">Client Logo {i}</span>
-                  </div>
-                ))}
+          {clientLogos.length > 0 ? (
+            <div className="relative">
+              <div className="flex animate-scroll">
+                {/* First set of logos */}
+                <div className="flex items-center space-x-16 min-w-full">
+                  {clientLogos.map((logo) => (
+                    <div key={logo.id} className="flex-shrink-0 w-48 h-24 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-white/20 p-4">
+                      <img
+                        src={logo.logo_url}
+                        alt={logo.name}
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+                {/* Duplicate set for seamless loop */}
+                <div className="flex items-center space-x-16 min-w-full">
+                  {clientLogos.map((logo) => (
+                    <div key={`dup-${logo.id}`} className="flex-shrink-0 w-48 h-24 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-white/20 p-4">
+                      <img
+                        src={logo.logo_url}
+                        alt={logo.name}
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="text-center text-gray-400">
+              <p>No client logos available yet. Add them from the admin panel.</p>
+            </div>
+          )}
         </div>
       </section>
 
