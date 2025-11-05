@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Plus, Edit2, Trash2, Save, X } from 'lucide-react';
+import { Plus, Edit2, Trash2, Save, X, LogOut } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import { supabase, Job } from '../lib/supabase';
 
 export default function Admin() {
+  const navigate = useNavigate();
+  const { signOut } = useAuth();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingJob, setEditingJob] = useState<Job | null>(null);
@@ -124,6 +128,11 @@ export default function Admin() {
     setShowForm(false);
   };
 
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/login');
+  };
+
   return (
     <div className="min-h-screen bg-[#0d0d0d] py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,15 +141,24 @@ export default function Admin() {
             <h1 className="text-3xl font-bold text-white">Job Management</h1>
             <p className="text-gray-400 mt-1">Create and manage job postings</p>
           </div>
-          {!showForm && (
+          <div className="flex items-center gap-3">
+            {!showForm && (
+              <button
+                onClick={() => setShowForm(true)}
+                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <Plus className="w-5 h-5" />
+                New Job Posting
+              </button>
+            )}
             <button
-              onClick={() => setShowForm(true)}
-              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              onClick={handleLogout}
+              className="flex items-center gap-2 bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors"
             >
-              <Plus className="w-5 h-5" />
-              New Job Posting
+              <LogOut className="w-5 h-5" />
+              Logout
             </button>
-          )}
+          </div>
         </div>
 
         {showForm && (
