@@ -52,7 +52,7 @@ export default function About() {
     {
       name: "Michael Wright",
       role: "Chief Operations Officer",
-      bio: "Expert in enterprise architecture and Salesforce solutions"
+      bio: "Driving operational impact through leadership, alignment, and continuous improvement."
     },
     {
       name: "Samya Pasha",
