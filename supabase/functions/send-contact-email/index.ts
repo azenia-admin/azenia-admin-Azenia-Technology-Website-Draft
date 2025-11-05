@@ -40,7 +40,6 @@ Deno.serve(async (req: Request) => {
 
     const submission: ContactSubmission = await req.json();
 
-    // Insert submission into database
     const { data: insertedData, error: insertError } = await supabase
       .from('contact_submissions')
       .insert({
@@ -67,7 +66,6 @@ Deno.serve(async (req: Request) => {
       throw insertError;
     }
 
-    // Prepare email content
     const emailSubject = submission.type === 'contact' 
       ? 'New Contact Form Submission'
       : 'New Partner With Us Form Submission';
@@ -114,12 +112,10 @@ Deno.serve(async (req: Request) => {
     emailBody += `<p><strong>Agree to Contact:</strong> ${submission.agreeToContact ? 'Yes' : 'No'}</p>`;
     emailBody += `<p><strong>Submitted at:</strong> ${new Date().toLocaleString()}</p>`;
 
-    // Send email using Resend API
     const resendApiKey = Deno.env.get('RESEND_API_KEY');
     
     if (!resendApiKey) {
       console.error('RESEND_API_KEY not configured');
-      // Still return success for database insert
       return new Response(
         JSON.stringify({ success: true, message: 'Submission saved but email not configured' }),
         {
@@ -148,7 +144,6 @@ Deno.serve(async (req: Request) => {
     if (!emailResponse.ok) {
       const errorText = await emailResponse.text();
       console.error('Email send failed:', errorText);
-      // Still return success for database insert
       return new Response(
         JSON.stringify({ success: true, message: 'Submission saved but email failed to send' }),
         {
@@ -160,7 +155,6 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    // Update submission to mark email as sent
     await supabase
       .from('contact_submissions')
       .update({
