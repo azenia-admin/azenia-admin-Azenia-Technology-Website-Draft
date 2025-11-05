@@ -110,11 +110,11 @@ export default function Home() {
                 {/* First set of logos */}
                 <div className="flex items-center space-x-16 min-w-full">
                   {clientLogos.map((logo) => (
-                    <div key={logo.id} className="flex-shrink-0 w-48 h-24 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-white/20 p-4">
+                    <div key={logo.id} className="flex-shrink-0 w-48 h-24 flex items-center justify-center p-4">
                       <img
                         src={logo.logo_url}
                         alt={logo.name}
-                        className="max-w-full max-h-full object-contain"
+                        className="max-w-full max-h-full object-contain opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
                       />
                     </div>
                   ))}
@@ -122,11 +122,11 @@ export default function Home() {
                 {/* Duplicate set for seamless loop */}
                 <div className="flex items-center space-x-16 min-w-full">
                   {clientLogos.map((logo) => (
-                    <div key={`dup-${logo.id}`} className="flex-shrink-0 w-48 h-24 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-white/20 p-4">
+                    <div key={`dup-${logo.id}`} className="flex-shrink-0 w-48 h-24 flex items-center justify-center p-4">
                       <img
                         src={logo.logo_url}
                         alt={logo.name}
-                        className="max-w-full max-h-full object-contain"
+                        className="max-w-full max-h-full object-contain opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
                       />
                     </div>
                   ))}
