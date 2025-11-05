@@ -22,13 +22,19 @@ export default function Admin() {
 
   const fetchJobs = async () => {
     try {
-      const { data, error } = await supabase
-        .from('jobs')
-        .select('*')
-        .order('created_at', { ascending: false });
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/manage-jobs`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+      });
 
-      if (error) throw error;
-      setJobs(data || []);
+      const result = await response.json();
+      if (result.success) {
+        setJobs(result.data || []);
+      } else {
+        throw new Error(result.error);
+      }
     } catch (error) {
       console.error('Error fetching jobs:', error);
     } finally {
@@ -40,20 +46,21 @@ export default function Admin() {
     e.preventDefault();
 
     try {
-      if (editingJob) {
-        const { error } = await supabase
-          .from('jobs')
-          .update({
-            ...formData,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', editingJob.id);
+      const method = editingJob ? 'PUT' : 'POST';
+      const body = editingJob ? { id: editingJob.id, ...formData } : formData;
 
-        if (error) throw error;
-      } else {
-        const { error } = await supabase.from('jobs').insert([formData]);
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/manage-jobs`, {
+        method,
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
 
-        if (error) throw error;
+      const result = await response.json();
+      if (!result.success) {
+        throw new Error(result.error);
       }
 
       resetForm();
@@ -70,9 +77,20 @@ export default function Admin() {
     }
 
     try {
-      const { error } = await supabase.from('jobs').delete().eq('id', id);
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/manage-jobs`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
+      });
 
-      if (error) throw error;
+      const result = await response.json();
+      if (!result.success) {
+        throw new Error(result.error);
+      }
+
       fetchJobs();
     } catch (error) {
       console.error('Error deleting job:', error);
