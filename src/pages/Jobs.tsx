@@ -98,7 +98,10 @@ export default function Jobs() {
 
       const { error: uploadError } = await supabase.storage
         .from('job-applications')
-        .upload(filePath, applicationData.resume);
+        .upload(filePath, applicationData.resume, {
+          cacheControl: '3600',
+          upsert: false
+        });
 
       if (uploadError) throw uploadError;
 
